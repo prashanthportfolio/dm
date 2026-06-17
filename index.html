@@ -9,124 +9,230 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
   <style>
 
-    /* ─── RESET ─── */
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{background:#0a0a0a;font-family:'Inter',sans-serif;overflow-x:hidden;}
+ /* ══════════════════════════════════════
+   HERO SECTION
+══════════════════════════════════════ */
 
-    /* ══════════════════════════════════════
-       HERO SECTION
-    ══════════════════════════════════════ */
-    .hero{
-      width:100%;min-height:520px;
-      background:#0a0a0a;
-      background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(120,40,200,0.5) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 50%, rgba(30,60,255,0.45) 0%, transparent 55%),
-        radial-gradient(ellipse at 50% 100%, rgba(80,0,160,0.3) 0%, transparent 50%);
-      position:relative;overflow:hidden;
-      font-family:'Inter',sans-serif;
-      display:flex;flex-direction:column;
-    }
+.hero{
+  width:100%;
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  background:#000;
+  font-family:'Inter',sans-serif;
+}
 
-    .nav{
-      position:relative;z-index:20;
-      display:flex;justify-content:center;gap:40px;
-      padding:22px 0 0;
-    }
-    .nav a{
-      font-size:10px;font-weight:600;letter-spacing:0.2em;
-      text-transform:uppercase;color:#fff;text-decoration:none;
-      transition:color 0.2s;cursor:pointer;
-    }
-    .nav a:hover{color:#f6ee7d;}
+.hero-bg-video{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
 
-    .hero-body{
-      flex:1;position:relative;
-      display:flex;align-items:center;justify-content:center;
-      min-height:460px;
-    }
+.video-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:1;
+}
 
-    .big-text{
-      position:absolute;top:40%;left:50%;
-      transform:translate(-50%,-50%);
-      z-index:2;text-align:center;width:100%;
-      padding:0 16px;pointer-events:none;line-height:0.88;
-    }
-    .hi-line{
-      font-family:'Anton',sans-serif;
-      font-size:clamp(100px,14vw,130px);
-      color:#ffef75;letter-spacing:0.02em;display:block;
-      opacity:0;transform:translateY(-20px);
-      animation:dropIn 0.6s cubic-bezier(.22,1,.36,1) 0.2s forwards;
-    }
-    .name-line{
-      font-family:'Anton',sans-serif;
-      font-size:clamp(200px,14vw,130px);
-      letter-spacing:0.02em;display:block;
-      opacity:0;transform:translateY(20px);
-      animation:riseIn 0.6s cubic-bezier(.22,1,.36,1) 0.5s forwards;
-      background:linear-gradient(90deg,#ffffff 0%,#c0c0c0 100%);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-    }
-    .name-typed{display:inline;}
-    .cursor-blink{
-      display:inline-block;width:6px;height:0.82em;
-      background:#fff;vertical-align:middle;margin-left:4px;
-      animation:blink 0.75s step-end infinite;
-      -webkit-text-fill-color:#fff;
-    }
+.nav{
+  position:relative;
+  z-index:5;
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  padding:22px 0 0;
+}
 
-    .portrait{
-      position:relative;z-index:10;
-      display:flex;align-items:flex-end;justify-content:center;
-      height:100%;width:100%;pointer-events:none;
-    }
-    .portrait img{
-      height:400px;max-height:80%;width:auto;object-fit:contain;display:block;
-      opacity:0;transform:scale(0.94) translateY(10px);
-      animation:imgIn 1s cubic-bezier(.22,1,.36,1) 2s forwards;
-      filter:drop-shadow(0 0 60px rgba(255,255,255,0.06));
-    }
+.nav a{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:#fff;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.3s;
+}
 
-    .hero-left-text{
-      position:absolute;left:28px;bottom:44px;z-index:15;
-      max-width:190px;opacity:0;
-      animation:fadeUp 0.6s ease 1.3s forwards;
-    }
-    .hero-left-text p{
-      font-size:11px;font-weight:400;line-height:1.65;
-      color:#fff;text-transform:uppercase;letter-spacing:0.06em;
-    }
+.nav a:hover{
+  color:#f6ee7d;
+}
 
-    .contact-btn{
-      position:absolute;right:28px;bottom:44px;z-index:15;
-      opacity:0;animation:fadeUp 0.6s ease 1.5s forwards;
-    }
-    .contact-btn button{
-      background:linear-gradient(135deg,#7c3aed,#4f46e5,#0ea5e9);
-      color:#fff;border:none;padding:12px 24px;
-      font-size:11px;font-weight:700;letter-spacing:0.14em;
-      text-transform:uppercase;border-radius:40px;cursor:pointer;
-      transition:transform 0.2s,opacity 0.2s;font-family:'Inter',sans-serif;
-    }
-    .contact-btn button:hover{transform:scale(1.05);opacity:0.9;}
+.hero-body{
+  flex:1;
+  position:relative;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  padding-left:8%;
+  min-height:calc(100vh - 80px);
+}
 
-    .bottom-line{
-      position:absolute;bottom:0;left:0;right:0;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
-      z-index:5;
-    }
-    .grain{
-      position:absolute;inset:0;z-index:1;opacity:0.03;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size:150px;pointer-events:none;
-    }
+.big-text{
+  text-align:left;
+}
 
-    @keyframes dropIn{to{opacity:1;transform:translateY(0);}}
-    @keyframes riseIn{to{opacity:1;transform:translateY(0);}}
-    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-    @keyframes imgIn{to{opacity:1;transform:scale(1) translateY(0);}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hi-line{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(70px,7vw,120px);
+  color:#ffef75;
+  display:block;
+  opacity:0;
+  transform:translateY(-20px);
+  animation:dropIn .6s cubic-bezier(.22,1,.36,1) .2s forwards;
+}
+
+.name-line{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(100px,10vw,180px);
+  line-height:.9;
+  display:block;
+  opacity:0;
+  transform:translateY(20px);
+  animation:riseIn .6s cubic-bezier(.22,1,.36,1) .5s forwards;
+  background:linear-gradient(90deg,#fff,#c0c0c0);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.name-typed{
+  display:inline;
+}
+
+.cursor-blink{
+  display:inline-block;
+  width:6px;
+  height:.82em;
+  background:#fff;
+  vertical-align:middle;
+  margin-left:4px;
+  animation:blink .75s step-end infinite;
+}
+
+.hero-left-text{
+  position:absolute;
+  left:8%;
+  bottom:60px;
+  z-index:5;
+  max-width:320px;
+  opacity:0;
+  animation:fadeUp .6s ease 1.3s forwards;
+}
+
+.hero-left-text p{
+  font-size:12px;
+  line-height:1.8;
+  color:#fff;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+
+.contact-btn{
+  position:absolute;
+  right:40px;
+  bottom:60px;
+  z-index:5;
+  opacity:0;
+  animation:fadeUp .6s ease 1.5s forwards;
+}
+
+.contact-btn button{
+  background:linear-gradient(135deg,#7c3aed,#4f46e5,#0ea5e9);
+  color:#fff;
+  border:none;
+  padding:12px 24px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  border-radius:40px;
+  cursor:pointer;
+}
+
+.contact-btn button:hover{
+  transform:scale(1.05);
+}
+
+.bottom-line{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.08),
+    transparent
+  );
+  z-index:5;
+}
+
+.grain{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:150px;
+}
+
+@keyframes dropIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes riseIn{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes blink{
+  0%,100%{opacity:1;}
+  50%{opacity:0;}
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(14px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media(max-width:768px){
+
+  .hero-body{
+    justify-content:center;
+    text-align:center;
+    padding:0 20px;
+  }
+
+  .hero-left-text{
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+  }
+
+  .contact-btn{
+    right:50%;
+    transform:translateX(50%);
+  }
+}
 
     /* ══════════════════════════════════════
        ABOUT SECTION
@@ -844,49 +950,98 @@ body{background:#0a0a0a;font-family:'Syne',sans-serif;}
 
 
 
+
+.game-section{
+  background:#000;
+  padding:100px 20px;
+  text-align:center;
+}
+
+.game-title{
+  color:#fff;
+  font-size:48px;
+  margin-bottom:10px;
+  font-family:'Anton',sans-serif;
+  letter-spacing:2px;
+}
+
+.game-subtitle{
+  color:#999;
+  margin-bottom:40px;
+}
+
+#gameCanvas{
+  background:#000;
+  width:100%;
+  max-width:1200px;
+  height:400px;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+}
+
+.game-controls{
+  color:#777;
+  margin-top:20px;
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+
+
+
   </style>
 </head>
 <body>
 
   <!-- ══ HERO ══ -->
-  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Hero section – Hi I'm Prashanth, Video Editor and Visual Designer</h2>
+ <section class="hero">
 
-  <section class="hero">
-    <div class="grain"></div>
+  <!-- Background Video -->
+  <video class="hero-bg-video" autoplay muted loop playsinline>
+    <source src="https://res.cloudinary.com/dm0ir0sw1/video/upload/v1781679551/Minimal_website_hero_animation_202606171227_wk2zmb.mp4" type="video/mp4">
+  </video>
 
-    <nav class="nav" aria-label="Main navigation">
-      <a>About</a>
-      <a>Creations</a>
-      <a>Projects</a>
-      <a>Contact</a>
-    </nav>
+  <!-- Overlay -->
+  <div class="video-overlay"></div>
 
-    <div class="hero-body">
-      <div class="big-text" aria-label="Hi, I'm Prashanth">
-        <span class="hi-line">HI, I'M</span>
-        <span class="name-line">
-          <span class="name-typed" id="nameTyped"></span>
-          <span class="cursor-blink" id="nameCursor"></span>
-        </span>
-      </div>
+  <div class="grain"></div>
 
-      <div class="portrait">
-        <img
-          src="https://res.cloudinary.com/dm0ir0sw1/image/upload/v1780639541/ChatGPT_Image_Jun_5__2026__11_32_36_AM-removebg-preview_ejew5u.png"
-          alt="Prashanth"/>
-      </div>
+  <nav class="nav" aria-label="Main navigation">
+    <a>About</a>
+    <a>Creations</a>
+    <a>Projects</a>
+    <a>Contact</a>
+  </nav>
 
-      <div class="hero-left-text">
-        <p>A video editor passionate<br>about crafting bold and<br>memorable projects.</p>
-      </div>
+  <div class="hero-body">
 
-      <div class="contact-btn">
-        <button>Contact Me</button>
-      </div>
+    <div class="big-text">
+      <span class="hi-line">HI, I'M</span>
 
-      <div class="bottom-line"></div>
+      <span class="name-line">
+        <span class="name-typed" id="nameTyped"></span>
+        <span class="cursor-blink" id="nameCursor"></span>
+      </span>
     </div>
-  </section>
+
+    <div class="hero-left-text">
+      <p>
+        A video editor passionate<br>
+        about crafting bold and<br>
+        memorable projects.
+      </p>
+    </div>
+
+    <div class="contact-btn">
+      <button>Contact Me</button>
+    </div>
+
+    <div class="bottom-line"></div>
+
+  </div>
+
+</section>
+
 
   <!-- ══ ABOUT ══ -->
   <div class="cursor-dot" id="cursorDot"></div>
@@ -1163,36 +1318,57 @@ body{background:#0a0a0a;font-family:'Syne',sans-serif;}
  
     <!-- Form Card -->
     <div class="form-card">
-      <form id="contactForm" action="https://connect.pabbly.com/webhook-listener/webhook/IjU3NjIwNTZkMDYzMTA0MzE1MjY5NTUzNyI_3D_pc/IjU3NjcwNTY5MDYzNzA0MzY1MjY5NTUzNjUxMzEi_pc" method="POST" autocomplete="off">
+      <form id="contactForm" action="https://connect.pabbly.com/webhook-listener/webhook/IjU3NjMwNTZkMDYzMjA0MzM1MjZiNTUzMyI_3D_pc/IjU3NjcwNTY5MDYzNzA0M2M1MjY1NTUzNzUxMzci_pc" method="POST" autocomplete="off">
  
         <div class="form-grid">
  
           <!-- Name -->
-          <div class="field">
-            <label for="fname">Full Name</label>
-            <div class="field-input-wrap">
-              <input type="text" id="fname" name="name" placeholder="" required/>
-              <span class="field-icon">👤</span>
-            </div>
-          </div>
- 
-          <!-- Phone -->
-          <div class="field">
-            <label for="fphone">Phone Number</label>
-            <div class="field-input-wrap">
-              <input type="tel" id="fphone" name="phone" placeholder="" required/>
-              <span class="field-icon">📞</span>
-            </div>
-          </div>
- 
-          <!-- Email full width -->
-          <div class="field form-full">
-            <label for="femail">Email Address</label>
-            <div class="field-input-wrap">
-              <input type="email" id="femail" name="email" placeholder="" required/>
-              <span class="field-icon">✉️</span>
-            </div>
-          </div>
+<div class="field">
+  <label for="fname">Full Name</label>
+  <div class="field-input-wrap">
+    <input
+      type="text"
+      id="fname"
+      name="name"
+      required
+      pattern="[A-Za-z\s]+"
+      title="Name should contain only letters and spaces"
+    />
+    <span class="field-icon">👤</span>
+  </div>
+</div>
+
+<!-- Phone -->
+<div class="field">
+  <label for="fphone">Phone Number</label>
+  <div class="field-input-wrap">
+    <input
+      type="tel"
+      id="fphone"
+      name="phone"
+      required
+      maxlength="10"
+      pattern="[0-9]{10}"
+      title="Please enter a valid 10-digit phone number"
+    />
+    <span class="field-icon">📞</span>
+  </div>
+</div>
+
+<!-- Email -->
+<div class="field form-full">
+  <label for="femail">Email Address</label>
+  <div class="field-input-wrap">
+    <input
+      type="email"
+      id="femail"
+      name="email"
+      required
+      title="Please enter a valid email address"
+    />
+    <span class="field-icon">✉️</span>
+  </div>
+</div>
  
           <!-- Message full width -->
           <div class="field form-full">
@@ -1232,6 +1408,236 @@ body{background:#0a0a0a;font-family:'Syne',sans-serif;}
  
   </div>
 </section>
+
+
+<section class="game-section">
+  <h2 class="game-title">TAKE A BREAK 🎮</h2>
+  <p class="game-subtitle">Can you beat my score?</p>
+
+  <canvas id="gameCanvas"></canvas>
+
+  <div class="game-controls">
+    <span>SPACEBAR / TAP TO JUMP</span>
+  </div>
+</section>
+
+
+
+
+<script>
+
+// Name: only letters and spaces
+document.getElementById("fname").addEventListener("input", function() {
+    this.value = this.value.replace(/[^A-Za-z\s]/g, "");
+});
+
+// Phone: only numbers and max 10 digits
+document.getElementById("fphone").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "").slice(0, 10);
+});
+
+</script>
+
+
+
+<script>
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = 1200;
+canvas.height = 400;
+
+const playerImg = new Image();
+
+playerImg.src =
+"https://res.cloudinary.com/dm0ir0sw1/image/upload/v1781686351/ChatGPT_Image_Jun_17__2026__02_13_40_PM-removebg-preview_ekwkgj.png";
+
+const groundY = 320;
+
+let score = 0;
+let gameOver = false;
+
+const player = {
+    x:100,
+    y:groundY - 170,
+    width:170,
+    height:170,
+    velocityY:0,
+    gravity:0.8,
+    jumpPower:-18,
+    jumping:false
+};
+
+const obstacles = [];
+
+function createObstacle(){
+
+    const height = 100 + Math.random()*80;
+
+    obstacles.push({
+        x:canvas.width,
+        y:groundY-height,
+        width:30,
+        height:height
+    });
+}
+
+setInterval(()=>{
+    if(!gameOver){
+        createObstacle();
+    }
+},1500);
+
+function jump(){
+
+    if(!player.jumping){
+
+        player.velocityY = player.jumpPower;
+        player.jumping = true;
+    }
+}
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.code==="Space"){
+        jump();
+    }
+
+    if(gameOver && e.code==="KeyR"){
+        location.reload();
+    }
+});
+
+canvas.addEventListener("click",jump);
+canvas.addEventListener("touchstart",jump);
+
+function update(){
+
+    if(gameOver) return;
+
+    player.velocityY += player.gravity;
+    player.y += player.velocityY;
+
+    if(player.y >= groundY-player.height){
+
+        player.y = groundY-player.height;
+        player.velocityY = 0;
+        player.jumping = false;
+    }
+
+    for(let i=0;i<obstacles.length;i++){
+
+        obstacles[i].x -= 10;
+
+        if(
+            player.x < obstacles[i].x + obstacles[i].width &&
+            player.x + player.width > obstacles[i].x &&
+            player.y < obstacles[i].y + obstacles[i].height &&
+            player.y + player.height > obstacles[i].y
+        ){
+            gameOver = true;
+        }
+    }
+
+    while(obstacles.length && obstacles[0].x < -50){
+        obstacles.shift();
+        score++;
+    }
+}
+
+function draw(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    ctx.fillStyle="white";
+    ctx.font="32px monospace";
+
+    ctx.fillText(
+        "SCORE " + score.toString().padStart(5,"0"),
+        canvas.width - 250,
+        50
+    );
+
+    ctx.strokeStyle="white";
+    ctx.lineWidth=3;
+
+    ctx.beginPath();
+    ctx.moveTo(0,groundY);
+    ctx.lineTo(canvas.width,groundY);
+    ctx.stroke();
+
+    for(let i=0;i<canvas.width;i+=50){
+
+        ctx.fillStyle="white";
+
+        ctx.fillRect(
+            i,
+            groundY+10,
+            10,
+            2
+        );
+    }
+
+    obstacles.forEach(ob=>{
+
+        ctx.fillStyle="white";
+
+        ctx.fillRect(
+            ob.x,
+            ob.y,
+            ob.width,
+            ob.height
+        );
+    });
+
+    ctx.drawImage(
+        playerImg,
+        player.x,
+        player.y,
+        player.width,
+        player.height
+    );
+
+    if(gameOver){
+
+        ctx.fillStyle="white";
+        ctx.font="50px monospace";
+
+        ctx.fillText(
+            "GAME OVER",
+            canvas.width/2-180,
+            150
+        );
+
+        ctx.font="24px monospace";
+
+        ctx.fillText(
+            "Press R To Restart",
+            canvas.width/2-110,
+            200
+        );
+    }
+}
+
+function gameLoop(){
+
+    update();
+    draw();
+
+    requestAnimationFrame(gameLoop);
+}
+
+playerImg.onload = ()=>{
+    gameLoop();
+};
+
+</script>
+
+
+
+
+
 <script>
 function showMessage() {
     alert("Thank you! Your form has been submitted successfully.");
